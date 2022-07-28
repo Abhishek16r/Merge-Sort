@@ -1,0 +1,62 @@
+import java.util.Scanner;
+public class Merge_sort {
+	
+	public static void mergeSort(int []arr,int si, int ei) {
+		if (si>=ei) {
+			return;
+		}
+		int mid = (si+ei)/2;
+		mergeSort(arr,si,mid);
+		mergeSort(arr,mid+1,ei);
+		merge(arr,si,ei);
+	}
+	
+	public static void merge(int []arr, int si, int ei) {
+		int size = ei - si +1;
+		int mid = (si+ei)/2;
+		int[] out = new int[size];
+		int i=si,j=mid+1,k=0;
+		while (i<=mid && j<=ei) {
+			if (arr[i]<arr[j]) {
+				out[k]=arr[i];
+				i++;
+				k++;
+			}
+			else {
+				out[k]=arr[j];
+				j++;
+				k++;
+			}
+		}
+		while (i<=mid) {
+			out[k]=arr[i];
+			i++;
+			k++;
+		}
+		while(j<=ei) {
+			out[k]=arr[j];
+			j++;
+			k++;
+		}
+		int m = 0;
+		for (int n=si;n<=ei;n++) {
+			arr[n]=out[m];
+			m++;
+		}
+	}
+	
+ 	public static void main (String []args) {
+		Scanner s = new Scanner(System.in);
+		int size = s.nextInt();
+		int arr[] = new int[size];
+		for (int i=0;i<size;i++) {
+			arr[i]= s.nextInt();
+		}
+		mergeSort(arr,0,arr.length-1);
+		for (int i=0;i<size;i++) {
+			System.out.print(arr[i]+" ");
+		}
+		
+	}
+
+}
